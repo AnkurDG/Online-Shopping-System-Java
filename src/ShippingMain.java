@@ -26,7 +26,3 @@ class Shipping{
 
 }
 
-
-
-public class ShippingMain {
-}

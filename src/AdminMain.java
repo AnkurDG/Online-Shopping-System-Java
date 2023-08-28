@@ -1,73 +1,50 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 class Admin{
     private Inventory inventory;
-    private ArrayList<Product> products = new ArrayList<>();
-    private ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<Order> orders  = new ArrayList<>();
+    private HashMap<UUID, Product> products = new HashMap<>();
+    private HashMap<UUID,Integer> stockLevel = new HashMap<>();
+    private HashMap<UUID, Customer> customers = new HashMap<>();
+    private HashMap<UUID,Order> orders  = new HashMap<>();
+
 
     // Constructor
     public Admin() {}
     // methods for adding and updating products
 
-    void addProduct(Product product) { products.add(product); }
+    void addProduct(Product product) { products.put(product.getProductID(),product); }
 
     void updateProduct(Product product) {
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).equals(product)) {
-                products.set(i, product);
-                break;
-            }
-        }
+        products.put(product.getProductID(),product);
     }
 
     // Methods for managing stock level
     public void updateStockLevel(Product product, int stockLevel) {
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i) == product) {
-                products.get(i).setStockLevel(stockLevel);
-                break;
-            }
-        }
+      Product p = products.get(product.getProductID());
+      p.setStockLevel(stockLevel);
     }
 
     // Method for adding an order
     void addOrder(Order order) {
-        orders.add(order);
+        orders.put(order.getOrderID(),order);
     }
 
     // Method for updating an order
     void updateOrder(Order orderToUpdate) {
-        for (int i = 0; i < orders.size(); i++) {
-            Order order = orders.get(i);
-            if (order.equals(orderToUpdate)) {
-                // Update the order
-                orders.set(i, orderToUpdate);
-                break;
-            }
-        }
+        orders.put(orderToUpdate.getOrderID(),orderToUpdate);
     }
 
 
 
     // Method for adding a customer
     void addCustomer(Customer customer) {
-        customers.add(customer);
+        customers.put(customer.getCustomerID(),customer);
     }
 
     // Method for updating a customer
     void updateCustomer(Customer customerToUpdate) {
-        for (int i = 0; i < customers.size(); i++) {
-            Customer customer = customers.get(i);
-            if (customer.equals(customerToUpdate)) {
-                // Update the customer
-                customers.set(i, customerToUpdate);
-                break;
-            }
-        }
+        customers.put(customerToUpdate.getCustomerID(),customerToUpdate);
     }
-
-}
-
-public class AdminMain {
 }

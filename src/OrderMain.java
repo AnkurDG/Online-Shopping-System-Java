@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 class Order{
+    private UUID orderID;
     private Customer customer;
     private ArrayList<Product> products = new ArrayList<>();
     private double totalCost;
@@ -10,6 +12,7 @@ class Order{
 
     //Constructor
     public Order(Customer customer,ArrayList<Product> products,double totalCost,Payment payment,Shipping shipping){
+        this.orderID = UUID.randomUUID();
         this.customer = customer;
         this.products = products;
         this.totalCost = totalCost;
@@ -18,16 +21,16 @@ class Order{
     }
 
     // getters and setters
+    public UUID getOrderID(){return orderID;}
+    public Customer getCustomer() { return customer; }
 
-    Customer getCustomer() { return customer; }
-
-    ArrayList<Product> getProducts() { return products; }
+    public ArrayList<Product> getProducts() { return products; }
 
     double getTotalCost() { return totalCost; }
 
-    Payment getPayment() { return payment; }
+    public Payment getPayment() { return payment; }
 
-    Shipping getShipping() { return shipping; }
+    public Shipping getShipping() { return shipping; }
 
     void setCustomer(Customer customer) { this.customer = customer; }
 
@@ -51,29 +54,7 @@ class Order{
 
         Order order = (Order) obj;
 
-        return customer.equals(order.customer) &&
-                products.equals(order.products) &&
-                Double.compare(totalCost, order.totalCost) == 0;
+        return orderID.equals(order.orderID);
     }
-}
 
-public class OrderMain {
-    public static void main(String[] args){
-        Customer c1 = new Customer("Ankur","Solapur","ankur@gmail.com");
-        Customer c2 = new Customer("Kranti","Solapur","ankur@gmail.com");
-        ArrayList<Product> p1 = new ArrayList<>();
-        Product p2 = new Product("Ankur","Solapur",20.9,1);
-        Product p4 = new Product("Ankur","Solapur",20.9,1);
-
-        p1.add(p2);
-        p1.add(p4);
-
-        Payment p3 = new Payment();
-        Shipping s = new Shipping();
-
-        Order o = new Order(c1,p1,100.0,p3,s);
-        Order o2 = new Order(c2,p1,100.0,p3,s);
-
-        System.out.println(o.equals(o2));
-    }
 }

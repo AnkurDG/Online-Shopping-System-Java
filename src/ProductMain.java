@@ -1,7 +1,8 @@
 
-import java.util.Objects;
+import java.util.UUID;
 
-class Product{
+class Product {
+    private UUID productID;
     private String name;
     private String description;
     private double price;
@@ -9,19 +10,21 @@ class Product{
 
     // Constructor
     public Product(String name,String description,double price,int stockLevel){
-
+        this.productID = UUID.randomUUID();
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockLevel = stockLevel;
 
+
     }
 
     // Getters
-    final public String getName(){
+    public UUID getProductID() { return productID;}
+    public String getName(){
         return name;
     }
-    final public String getDescription(){
+    public String getDescription(){
         return description;
     }
      public double getPrice(){
@@ -62,33 +65,9 @@ class Product{
         }
 
         Product otherProduct = (Product) obj;
-        return name.equals(otherProduct.name) &&
-                description.equals(otherProduct.description) &&
-                Double.compare(price, otherProduct.price) == 0 &&
-                stockLevel == otherProduct.stockLevel;
-    }
-
-    // this function hashes the attributes into to single hash code to use in hashMap Data Structure as key
-    public int hashCode() {
-        return Objects.hash(name, description, price, stockLevel);
+        return productID==(otherProduct.productID);
     }
 
 
 }
 
-
-
-
-
-public class ProductMain{
-    public static void main(String[] args){
-
-//        Product p1 = new Product("Ankur","Solapur",20.9,1);
-//        Product p2 = new Product("Atharv", "Solapur",20.9,1);
-
-//        System.out.println(p1.hashCode());
-//        System.out.println(p2.hashCode());
-//        //-1774504381
-
-    }
-}

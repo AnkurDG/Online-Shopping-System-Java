@@ -1,6 +1,7 @@
-
+import java.util.UUID;
 
 class Customer{
+    private UUID customerID;
     private String name;
     private String address;
     private String email;
@@ -13,12 +14,14 @@ class Customer{
     }
 
     public Customer(String name,String address,String email){
+        this.customerID = UUID.randomUUID();
         this.name=name;
         this.address=address;
         this.email=email;
     }
 
     //getter
+    public UUID getCustomerID(){return customerID;}
     public String getName(){
         return name;
     }
@@ -49,22 +52,9 @@ class Customer{
         }
 
         Customer otherCustomer = (Customer) obj;
-        return name.equals(otherCustomer.name) &&
-                address.equals(otherCustomer.address) &&
-                email.equals(otherCustomer.email);
+        return customerID.equals(otherCustomer.customerID);
     }
 
 
 }
 
-public class CustomerMain {
-
-    public static void main(String[] args){
-
-        Customer c1 = new Customer("Ankur","Solapur","ankur@gmail.com");
-        Customer c2 = new Customer("Kranti","Gangakhed","kranti@gmail.com");
-
-
-        System.out.println(c1.equals(c2));
-    }
-}

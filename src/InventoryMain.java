@@ -1,8 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 class Inventory{
-    private Map<Product,Integer> products = new HashMap<Product,Integer>();
+    private HashMap<UUID, Integer> products = new HashMap<>();
 
     //Constructor
     public Inventory(){}
@@ -10,18 +11,18 @@ class Inventory{
     // Add product to the inventory
     public void addProduct(Product product,int stock){
 
-        products.put(product,stock);
+        products.put(product.getProductID(),stock);
     }
 
     // Update the Stock in the Inventory
     public void updateStock(Product product,int stock){
-        products.replace(product,stock);
+        products.replace(product.getProductID(),stock);
     }
 
     //Check if Stock is empty
     public boolean inStock(Product product){
 
-        int value = products.get(product);
+        int value = products.get(product.getProductID());
 
         if(value>0){
             return true;
@@ -32,27 +33,11 @@ class Inventory{
 
     // Update the Stock in the Inventory
     public void reStock(Product product,int quantity){
-        int value = products.get(product);
+        int value = products.get(product.getProductID());
 
         value+=quantity;
 
-        products.replace(product,value);
+        products.replace(product.getProductID(),value);
     }
 
-}
-
-
-public class InventoryMain {
-
-    public static void main(String[] args){
-        Inventory i = new Inventory();
-
-        Product p1 = new Product("Ankur","Solapur",20.9,1);
-
-        i.addProduct(p1,1);
-        i.addProduct(p1,2);
-
-//        System.out.println(i.inStock(p1));
-//        i.inStock(p1);
-    }
 }
